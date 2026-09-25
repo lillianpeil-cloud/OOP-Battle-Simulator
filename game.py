@@ -1,7 +1,20 @@
 from goblin import Goblin
-
+from hero import Hero
 
 ARENA_NAME = "Crayola Color World"
+
+def battle(hero: Hero, enemy: Goblin):
+    while hero.is_alive() and enemy.is_alive():
+        hero_damage = hero.attack()
+        enemy.take_damage(hero_damage)
+
+        if enemy.is_alive():
+            enemy_damage = enemy.attack()
+            hero.take_damage(enemy_damage)
+    if hero.is_alive():
+        print(f"{hero.name} wins")
+    else:
+        print(f"{enemy.name} wins!")
 
 
 def main():
@@ -13,10 +26,10 @@ def main():
     goblin = Goblin("Scribbles")
 
     print(f"{goblin.name} enters the arena with {goblin.health} health.")
+    bob = Hero("bobby")
+    print(f"{bob.name} enters the arena!")
+    battle(bob, goblin)
 
-    secondGoblin = Goblin("Gribbles")
-
-    print(f"{secondGoblin.name} enters the arena with {goblin.health} health.")
 
 
     print("But no hero has answered the call... yet.")
